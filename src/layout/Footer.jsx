@@ -9,19 +9,19 @@ function Footer() {
                     <div className="col-6 col-md">
                         <h5>My GitHub</h5>
                         <ul className="list-unstyled text-small">
-                            <li><a className="text-muted" href="https://github.com/OmetovVlad">OmetovVlad</a></li>
+                            <li><a className="text-muted" href="https://github.com/OmetovVlad" target="_blank">OmetovVlad</a></li>
                         </ul>
                     </div>
                     <div className="col-6 col-md">
                         <h5>My site</h5>
                         <ul className="list-unstyled text-small">
-                            <li><a className="text-muted" href="http://ometov.ru/">ometov.ru</a></li>
+                            <li><a className="text-muted" href="https://ometov.ru/" target="_blank">ometov.ru</a></li>
                         </ul>
                     </div>
                     <div className="col-6 col-md">
                         <h5>My VK</h5>
                         <ul className="list-unstyled text-small">
-                            <li><a className="text-muted" href="https://vk.com/ometovvlad">ometovvlad</a></li>
+                            <li><a className="text-muted" href="https://vk.com/ometovvlad" target="_blank">ometovvlad</a></li>
                         </ul>
                     </div>
                 </div>

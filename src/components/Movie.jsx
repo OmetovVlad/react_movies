@@ -18,6 +18,7 @@ function Movie (props){
                 <div className="card-body">
                     <h4 className="card-title">{title}</h4>
                     <h6 className="card-subtitle mb-2 text-muted">{year}</h6>
+                    <h6 className="card-subtitle mb-2 text-muted">{type}</h6>
                 </div>
             </div>
         </div>
