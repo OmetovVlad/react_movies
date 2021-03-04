@@ -1,50 +1,77 @@
-import React from 'react'
+import React, {useState ,useEffect} from 'react'
 import {Movies} from "../components/Movies";
 import {Preloader} from "../components/Preloader";
 import {Search} from "../components/Search";
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = '43c722b6';
 
-class Main extends React.Component{
-    constructor(props) {
-        super(props);
+const Main = () => {
 
-        this.state = {
-            movies: [],
-            loading: true
+    const [movies, setMovies] = useState([])
+    const [searchNull, setSearchNull] = useState(true)
+    const [loading, setLoading] = useState(true)
+
+    const searchMovies = (search, type = 'all') => {
+        if (search.length > 0) {
+            setLoading(true)
+            fetch(
+                `https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}${type !== 'all' ? `&type=${type}` : ''}`
+            )
+                .then(response => response.json())
+                .then(data => {
+                    setMovies(data.Search)
+                    setLoading(false)
+                    setSearchNull(false)
+                })
+                .catch((error) => {
+                    setLoading(false)
+                })
+        }else{
+            setSearchNull(true)
+            setLoading(false)
         }
-
-        this.searchMovies = this.searchMovies.bind(this)
     }
 
-    searchMovies (search, type = 'all'){
-        fetch(
-            `https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}${type !== 'all' ? `&type=${type}` : ''
-            }`
-        )
+    useEffect(() => {
+        fetch(`https://www.omdbapi.com/?apikey=${API_KEY}`)
             .then(response => response.json())
-            .then(data => this.setState({movies: data.Search, loading: false}))
-    }
+            .then(data => {
+                setMovies(data.Search)
+                setLoading(false)
+                setSearchNull(true)
+            })
+            .catch((error) => {
+                setLoading(false)
+            })
+    }, [])
 
-
-    componentDidMount() {
-        fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=matrix`)
-            .then(response => response.json())
-            .then(data => this.setState({movies: data.Search, loading: false}))
-    }
-
-    render() {
-        const {movies, loading} = this.state
-
+    if (searchNull){
         return (
             <main style={{padding: '30px 0'}}>
                 <div className="container">
-                    <Search searchMovies={this.searchMovies}/>
-                    {loading ? (
-                        <Preloader />
-                    ) : (
-                        <Movies movies={movies}/>
-                    )}
+                    <Search searchMovies={searchMovies}/>
+                    <div className="movies">
+                        <div className="container">
+                            <div className="d-flex justify-content-center"><h4>Введите название фильма</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        )
+    }else {
+        return (
+            <main style={{padding: '30px 0'}}>
+                <div className="container">
+                    <Search searchMovies={searchMovies}/>
+                    <div className="movies">
+                        <div className="container">
+                            {loading ? (
+                                <Preloader/>
+                            ) : (
+                                <Movies movies={movies}/>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </main>
         )

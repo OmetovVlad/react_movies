@@ -1,18 +1,14 @@
 import {Movie} from "./Movie";
 
-function Movies (props) {
+const Movies = props => {
     const {movies = []} = props;
 
     return(
-        <div className="movies">
-            <div className="container">
-                <div className="row">
-                    {movies.length ? movies.map(movie => (
-                            <Movie key={movie.imdbId} {...movie}/>
-                        )) : <h4>Пусто</h4>
-                    }
-                </div>
-            </div>
+        <div className="row">
+            {movies.length ? movies.map(movie => (
+                    <Movie key={movie.imdbID} {...movie}/>
+                )) : <div className="d-flex justify-content-center"><h4>Результатов поиска нет</h4></div>
+            }
         </div>
     )
 }

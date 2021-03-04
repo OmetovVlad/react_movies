@@ -1,4 +1,4 @@
-function Header() {
+const Header =() => {
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <div className="container">
@@ -10,7 +10,7 @@ function Header() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link" href="https://github.com/OmetovVlad/react_movies" target="_blank">Git repository</a>
+                            <a className="nav-link" href="https://github.com/OmetovVlad/react_movies" target="_blank" rel="noreferrer">Git repository</a>
                         </li>
                     </ul>
                 </div>
